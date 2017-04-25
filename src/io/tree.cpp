@@ -52,6 +52,7 @@ Tree::~Tree() {
 int Tree::Split(int leaf, int feature, BinType bin_type, uint32_t threshold_bin, int real_feature,
     double threshold_double, double left_value,
     double right_value, data_size_t left_cnt, data_size_t right_cnt, double gain) {
+  Log::Info("split at %d, bin %d, thr %f", real_feature, threshold_bin, threshold_double);
   int new_node_idx = num_leaves_ - 1;
   // update parent info
   int parent = leaf_parent_[leaf];

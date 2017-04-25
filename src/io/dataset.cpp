@@ -115,14 +115,10 @@ void Dataset::Construct(
 
 void Dataset::FinishLoad() {
   if (is_finish_load_) { return; }
-  OMP_INIT_EX();
-#pragma omp parallel for schedule(guided)
   for (int i = 0; i < num_groups_; ++i) {
-    OMP_LOOP_EX_BEGIN();
+    Log::Info("f %d bin0 %f", real_feature_idx_[i], feature_groups_[i]->bin_mappers_[0]->BinToValue(0));
     feature_groups_[i]->bin_data_->FinishLoad();
-    OMP_LOOP_EX_END();
   }
-  OMP_THROW_EX();
   is_finish_load_ = true;
 }
 
